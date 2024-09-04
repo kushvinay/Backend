@@ -9,9 +9,17 @@ require("./models/database").databaseConnect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const allowedOrigins = [
+	'https://frontend-snowy-nine.vercel.app',"https://frontend-git-main-vinay-kushwahas-projects-2db973fd.vercel.app",
+	"http://localhost:3000"
+];
+
 //connect cors 
 const cors = require('cors');
-app.use(cors({ credentials: true, origin: true }));
+app.use(cors({
+  origin: allowedOrigins,
+   credentials: true, 
+   }));
 
 //session and cookie
 const session = require("express-session");

@@ -41,11 +41,25 @@ exports.studentsignin = catchAsyncErron(async (req, res, next) => {
   sendtoken(student, 201, res);
 });
 
+// exports.studentsignout = catchAsyncErron(async (req, res, next) => {
+//   res.clearCookie("token");
+//   res.json({
+//     success:true,
+//     message: "successfully signout!",
+//   });
+// });
 exports.studentsignout = catchAsyncErron(async (req, res, next) => {
-  res.clearCookie("token");
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: true, // Match how it was set
+    sameSite: 'None', // Same as how it was set
+    domain: 'https://frontend-snowy-nine.vercel.app', // Match your domain
+    path: '/', // Ensure this matches the path used in the cookie
+  });
+  
   res.json({
-    success:true,
-    message: "successfully signout!",
+    success: true,
+    message: "Successfully signed out!",
   });
 });
 

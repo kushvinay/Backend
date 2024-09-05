@@ -30,7 +30,27 @@ exports.employesignup = catchAsyncErron(async (req,res,next)=>{
     //     return next(new errorHandler("user already exist with this email address" ,404))
     // }
     const employ = await new Employe(req.body).save();
-    sendtoken(employ,201,res);
+    sendtoken(employ,res
+        .status(201)
+        .cookie("accessToken", tokens?.accessToken,{
+          httpOnly: true,
+          secure: true,
+          maxAge:  24 * 60 * 60 * 1000,
+          sameSite:"none"
+        })
+        .cookie("refreshToken", tokens?.refreshToken, {
+          httpOnly: true,
+          secure: true,
+          maxAge:  21 * 24 * 60 * 60 * 1000,
+          sameSite: "none"
+        })
+        .json({
+          succcess: true,
+          message: "successfully register",
+          user: newUser,
+          accessToken: tokens.accessToken,
+          refreshToken: tokens?.refreshToken,
+        }));
     // res.status(201).json(employe); 
 
 })
@@ -44,7 +64,27 @@ exports.employesignin = catchAsyncErron(async (req,res,next)=>{
     const isMatch = employe.comparepassword(req.body.password);
     if(!isMatch) return next(new errorHandler("Wrong Credientials",500));
     
-    sendtoken(employe,201,res);
+    sendtoken(employe,res
+        .status(201)
+        .cookie("accessToken", tokens?.accessToken,{
+          httpOnly: true,
+          secure: true,
+          maxAge:  24 * 60 * 60 * 1000,
+          sameSite:"none"
+        })
+        .cookie("refreshToken", tokens?.refreshToken, {
+          httpOnly: true,
+          secure: true,
+          maxAge:  21 * 24 * 60 * 60 * 1000,
+          sameSite: "none"
+        })
+        .json({
+          succcess: true,
+          message: "successfully register",
+          user: newUser,
+          accessToken: tokens.accessToken,
+          refreshToken: tokens?.refreshToken,
+        }));
 })
 
 exports.employesignout = catchAsyncErron(async (req,res,next)=>{

@@ -25,29 +25,8 @@ exports.student = catchAsyncErron(async (req, res, next) => {
 exports.studentsignup = catchAsyncErron(async (req, res, next) => {
   console.log(req.body);
   const student = await new Student(req.body).save();
-  sendtoken(student, res
-    .status(201)
-    .cookie("accessToken", tokens?.accessToken,{
-      httpOnly: true,
-      secure: true,
-      maxAge:  24 * 60 * 60 * 1000,
-      sameSite:"none"
-    })
-    .cookie("refreshToken", tokens?.refreshToken, {
-      httpOnly: true,
-      secure: true,
-      maxAge:  21 * 24 * 60 * 60 * 1000,
-      sameSite: "none"
-    })
-    .json({
-      succcess: true,
-      message: "successfully register",
-      user: newUser,
-      accessToken: tokens.accessToken,
-      refreshToken: tokens?.refreshToken,
-    }));
-  
- 
+  sendtoken(student, 201, res);
+  console.log(student)
 });
 
 exports.studentsignin = catchAsyncErron(async (req, res, next) => {
@@ -59,27 +38,7 @@ exports.studentsignin = catchAsyncErron(async (req, res, next) => {
   const isMatch = student.comparepassword(req.body.password);
   if (!isMatch) return next(new errorHandler("Wrong Credientials", 500));
 
-  sendtoken(student, res
-    .status(201)
-    .cookie("accessToken", tokens?.accessToken,{
-      httpOnly: true,
-      secure: true,
-      maxAge:  24 * 60 * 60 * 1000,
-      sameSite:"none"
-    })
-    .cookie("refreshToken", tokens?.refreshToken, {
-      httpOnly: true,
-      secure: true,
-      maxAge:  21 * 24 * 60 * 60 * 1000,
-      sameSite: "none"
-    })
-    .json({
-      succcess: true,
-      message: "successfully register",
-      user: newUser,
-      accessToken: tokens.accessToken,
-      refreshToken: tokens?.refreshToken,
-    }));
+  sendtoken(student, 201, res);
 });
 
 exports.studentsignout = catchAsyncErron(async (req, res, next) => {

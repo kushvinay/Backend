@@ -6,7 +6,7 @@ exports.sendtoken = (student,statusCode,res) => {
         ),
         httpOnly: true,
     }
-    res.status(statusCode).cookie("token",token,options, {
+    res.status(statusCode).cookie("token",token, {
         httpOnly: true,
         secure: true,
         maxAge:   24 * 60 * 60 * 1000,

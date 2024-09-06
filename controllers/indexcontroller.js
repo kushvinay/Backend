@@ -42,9 +42,11 @@ exports.studentsignin = catchAsyncErron(async (req, res, next) => {
 });
 
 exports.studentsignout = catchAsyncErron(async (req, res, next) => {
-  res.clearCookie("token",{
-    httpOnly: true,
+  res.clearCookie("token", "",{
+        httpOnly: true,
         secure: true,
+        sameSite: "none", // Match sameSite setting
+        expires: new Date(0), // Expire immediately to clear the cookie
   }
   );
   res.json({

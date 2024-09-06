@@ -11,7 +11,8 @@ exports.sendtoken = (student,statusCode,res) => {
         secure: true,
         maxAge:   24 * 60 * 60 * 1000,
         sameSite: "none"
-      }).json({succes: true,
+      }).json({
+        success: true,
         id: student._id, student
     });
 };

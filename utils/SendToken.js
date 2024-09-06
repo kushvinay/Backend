@@ -9,7 +9,7 @@ exports.sendtoken = (student,statusCode,res) => {
     res.status(statusCode).cookie("token",token,  {
         httpOnly: true,
         secure: true,
-        maxAge:  21 * 24 * 60 * 60 * 1000,
+        maxAge:   24 * 60 * 60 * 1000,
         sameSite: "none"
       }).json({succes: true,
         id: student._id, student

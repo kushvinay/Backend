@@ -2,14 +2,14 @@ exports.sendtoken = (student,statusCode,res) => {
     const token = student.getjwtoken();
     const options = { 
         exipres: new Date(
-            Date.now() + process.env.COOKIE_EXPIRE * 60 * 60 * 1000 
+            Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000 
         ),
         httpOnly: true,
     }
     res.status(statusCode).cookie("token",token, {
         httpOnly: true,
         secure: true,
-        maxAge:    60 * 60 * 1000,
+        maxAge:  24 * 60 * 60 * 1000,
         sameSite: "none"
       }).json({
         success: true,

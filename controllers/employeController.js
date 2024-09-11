@@ -221,7 +221,7 @@ exports.createjob = catchAsyncErron(async (req,res,next)=>{
     const employe = await Employe.findById(req.id).exec();
     const job = await new Job(req.body);
     job.employe = employe._id;
-    job.save();x
+    job.save();
     employe.jobs.push(job._id);
     await employe.save()
     res.status(200).json({

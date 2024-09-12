@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const allowedOrigins = [
-	// 'https://frontend-snowy-nine.vercel.app',"https://frontend-git-main-vinay-kushwahas-projects-2db973fd.vercel.app",
-	// "http://localhost:3000"
+	'https://naukri-adda-frontend.vercel.app',"https://naukri-adda-frontend-git-main-vinay-kushwahas-projects-2db973fd.vercel.app",
+	"http://localhost:3000"
 ];
 
 //connect cors 

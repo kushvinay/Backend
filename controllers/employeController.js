@@ -48,11 +48,17 @@ exports.employesignin = catchAsyncErron(async (req,res,next)=>{
 })
 
 exports.employesignout = catchAsyncErron(async (req,res,next)=>{
-   res.clearCookie("token");
-   res.json({
+    res.clearCookie("token", "",{
+        httpOnly: true,
+        secure: true,
+        sameSite: "none", // Match sameSite setting
+        expires: new Date(0), // Expire immediately to clear the cookie
+  }
+  );
+  res.json({
     success:true,
-    message: "successfully signout!"
-   })
+    message: "successfully signout!",
+  });
 })
 
 exports.employeforgetpassword = catchAsyncErron(async (req,res,next)=>{

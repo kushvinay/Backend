@@ -34,7 +34,7 @@ router.post("/signup", employesignup);
 
 router.post("/signin", employesignin);
 
-router.get("/signout", isAuthenticated ,  employesignout);
+router.get("/employe/signout", isAuthenticated ,  employesignout);
 
 router.post("/employe/forget-password",  employeforgetpassword);
 

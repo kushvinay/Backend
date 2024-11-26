@@ -18,6 +18,8 @@ exports.databaseConnect = async () => {
 	// console.log(require('dotenv').config());
 	mongoose
 		.connect(process.env.MONGO_URL)
-		.then(() => console.log('Database connection successfully !'))
+		.then(() => console.log('Database connection successfully ! '))
 		.catch(err => (err.message));
 };
+
+

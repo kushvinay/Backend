@@ -42,12 +42,24 @@ const studentModel = new mongoose.Schema({
         type:String,
         unique:true,
         require:[true,"Email is required"],
+        unique: [true, "Email already exists"],
+        index: { unique: true, sparse: true },
+        match: [
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            'Please fill a valid email address',
+        ],
+
     },
     password:{
         type:String,
         select:false,
+        required: [true, "password is required"],
+        minLength: [6, 'Password should have atleast 6 Characters'],
+        maxLength: [15, 'Password should not exceed more than 15 Characters'],
+     // match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/ , "Password must have this char"],
     },
-    passwordResatToken:{
+    
+    passwordResetToken:{
         type:String,
         default:"0"
     },

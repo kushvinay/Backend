@@ -47,10 +47,13 @@ app.use("/employe", require("./routes/employeRoutes"));
 
 //error handling
 const errorHandler = require("./utils/errorHandler");
+
 const { generatedErrors } = require("./middlewares/error");
+
 app.get("*", (req, res, next) => {
   next(new errorHandler(`request url not found ${req.url}`));
 });
+
 app.use(generatedErrors);
 app.listen(
   process.env.PORT,

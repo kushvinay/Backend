@@ -39,10 +39,21 @@ const employeModel = new mongoose.Schema({
         type:String,
         unique:true,
         require:[true,"Email is required"],
+        unique: [true, "Email already exists"],
+        index: { unique: true, sparse: true },
+        match: [
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            'Please fill a valid email address',
+        ],
+
     },
     password:{
         type:String,
-        select:false,
+        select:false,  
+         required: [true, "password is required"],
+        minLength: [8, 'Password should have atleast 6 Characters'],
+        maxLength: [15, 'Password should not exceed more than 15 Characters'],
+
     },
     passwordResatToken:{
         type:String,
